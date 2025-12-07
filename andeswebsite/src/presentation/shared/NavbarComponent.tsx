@@ -2,6 +2,7 @@
 // import { useProjects } from "../../stores/stores";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { statics } from "../../assets/medie";
 
 const NavbarComponent = ({
   onScroll,
@@ -25,14 +26,15 @@ const NavbarComponent = ({
   return (
     <>
       {path.pathname === "/" ? (
-        <nav className="flex justify-between items-center h-[10vh] md:grid md:grid-cols-12 bg-darkblue z-20 fixed w-full shadow-lg opacity-95">
-          {/* Espaciado para diseño */}
-          <div className="md:col-span-1"></div>
-
+        <nav className="flex justify-between items-center h-[10vh] md:grid md:grid-cols-12 bg-red-100 z-20 fixed w-full shadow-lg opacity-95">
           {/* Título */}
-          <span className="md:col-span-4 lg:col-span-3 text-lightblue md:text-2xl lg:text-3xl font-medium">
-            EL CÓDIGO RECUERDA
-          </span>
+          <div className="md:col-span-4 lg:col-span-3 text-lightblue md:text-2xl lg:text-3xl font-medium">
+            <img
+              src={statics.logo}
+              alt="Constructora de los Andes - Logo"
+              className="w-56 p-5"
+            />
+          </div>
 
           {/* Botón de menú (solo visible en móviles) */}
           <div className="relative md:hidden">
@@ -58,7 +60,7 @@ const NavbarComponent = ({
               <Link
                 to="#"
                 onClick={() => {
-                  onScroll("about");
+                  onScroll("hero");
                   toggleMenu();
                 }}
                 className="block px-4 py-2 hover:bg-midblue transition-all duration-250 cursor-pointer bg-transparent border-none w-24 text-lightblue"
@@ -68,7 +70,7 @@ const NavbarComponent = ({
               <Link
                 to="#"
                 onClick={() => {
-                  onScroll("studies");
+                  onScroll("references");
                   toggleMenu();
                 }}
                 className="block px-4 py-2 hover:bg-midblue transition-all duration-250 cursor-pointer bg-transparent border-none w-24 text-lightblue"
@@ -90,7 +92,7 @@ const NavbarComponent = ({
                 // variant="bordered"
                 to="#"
                 onClick={() => {
-                  onScroll("technologies");
+                  onScroll("contact");
                   toggleMenu();
                 }}
                 className="block px-4 py-2 hover:bg-midblue transition-all duration-250 cursor-pointer bg-transparent border-none w-24 text-lightblue"
@@ -101,17 +103,17 @@ const NavbarComponent = ({
           </div>
 
           {/* Menú de navegación para pantallas grandes */}
-          <section className="hidden md:flex md:col-span-6 lg:col-span-7 gap-x-2 justify-self-end">
+          <section className="hidden md:flex md:col-span-6 lg:col-span-7 gap-x-8 justify-center items-center">
             <Link
               to="#"
-              onClick={() => onScroll("about")}
+              onClick={() => onScroll("hero")}
               className="text-lightblue text-lg lg:text-xl hover:text-midblue transition-all duration-250 cursor-pointer z-10 bg-transparent border-none"
             >
               Inicio
             </Link>
             <Link
               to="#"
-              onClick={() => onScroll("studies")}
+              onClick={() => onScroll("references")}
               className="text-lightblue text-lg lg:text-xl hover:text-midblue transition-all duration-250 cursor-pointer z-10 bg-transparent border-none"
             >
               Nosotros
@@ -125,15 +127,12 @@ const NavbarComponent = ({
             </Link>
             <Link
               to="#"
-              onClick={() => onScroll("technologies")}
+              onClick={() => onScroll("contact")}
               className="text-lightblue text-lg lg:text-xl hover:text-midblue transition-all duration-250 cursor-pointer z-10 bg-transparent border-none"
             >
               Contacto
             </Link>
           </section>
-
-          {/* Espaciado para diseño */}
-          <div className="md:col-span-1"></div>
         </nav>
       ) : null}
     </>

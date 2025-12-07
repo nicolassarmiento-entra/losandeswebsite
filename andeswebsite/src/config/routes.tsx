@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useRef } from "react";
 
 import LayoutComponent from "../presentation/layout";
 import LandingScreen from "../presentation/pages/LandingScreen";
@@ -7,21 +8,20 @@ import ProjectsSection from "../presentation/components/ProjectsSection";
 import ReferencesSection from "../presentation/components/ReferencesSection";
 import ContactSection from "../presentation/components/ContactSection";
 import NavbarComponent from "../presentation/shared/NavbarComponent";
-import { useRef } from "react";
 import FooterComponent from "../presentation/shared/FooterComponent";
 
 const MyRoutes = () => {
-  const aboutRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
-  const studiesRef = useRef<HTMLDivElement>(null);
-  const techsRef = useRef<HTMLDivElement>(null);
+  const referencesRef = useRef<HTMLDivElement>(null);
+  const contactRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = (section: string) => {
     const refMap: Record<string, React.RefObject<HTMLDivElement | null>> = {
-      about: aboutRef,
+      hero: heroRef,
       projects: projectsRef,
-      studies: studiesRef,
-      technologies: techsRef,
+      references: referencesRef,
+      contact: contactRef,
     };
 
     const element = refMap[section]?.current;
@@ -41,8 +41,8 @@ const MyRoutes = () => {
 
   return (
     <Router>
+      <NavbarComponent onScroll={handleScroll} />
       <Routes>
-        <NavbarComponent onScroll={handleScroll} />
         <Route
           path="/"
           element={
@@ -50,10 +50,10 @@ const MyRoutes = () => {
               children={
                 <LandingScreen
                   children={[
-                    <HeroSection key="hero" />,
-                    <ProjectsSection key="projects" />,
-                    <ReferencesSection key="references" />,
-                    <ContactSection key="contact" />,
+                    <HeroSection key="hero" ref={heroRef} />,
+                    <ProjectsSection key="projects" ref={projectsRef} />,
+                    <ReferencesSection key="references" ref={referencesRef} />,
+                    <ContactSection key="contact" ref={contactRef} />,
                   ]}
                 />
               }
