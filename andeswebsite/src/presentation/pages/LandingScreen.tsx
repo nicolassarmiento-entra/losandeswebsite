@@ -1,10 +1,10 @@
-const LandingScreen = () => {
+const LandingScreen = ({ children }: { children: React.ReactNode[] }) => {
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline text-green-600">
-        Landing Screen
-      </h1>
-    </div>
+    <>
+      <div className="col-span-1 h-auto bg-blue-100"></div>
+      <div className="col-span-10 h-auto bg-green-100">{children}</div>
+      <div className="col-span-1 h-auto bg-blue-100"></div>
+    </>
   );
 };
 

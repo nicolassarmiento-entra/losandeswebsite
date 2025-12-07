@@ -56,7 +56,6 @@ const NavbarComponent = ({
               style={{ transformOrigin: "top center" }}
             >
               <Link
-                // variant="bordered"
                 to="#"
                 onClick={() => {
                   onScroll("about");
@@ -67,7 +66,6 @@ const NavbarComponent = ({
                 Sobre mí
               </Link>
               <Link
-                // variant="bordered"
                 to="#"
                 onClick={() => {
                   onScroll("studies");

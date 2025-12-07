@@ -1,12 +1,14 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import HomeScreen from '../../pages/screens/HomeScreen';
-// import MenuBarComponent from '../../pages/shared/MenuBarComponent';
-import React, { useRef } from "react";
+
 import LayoutComponent from "../presentation/layout";
 import LandingScreen from "../presentation/pages/LandingScreen";
+import HeroSection from "../presentation/components/HeroSection";
+import ProjectsSection from "../presentation/components/ProjectsSection";
+import ReferencesSection from "../presentation/components/ReferencesSection";
+import ContactSection from "../presentation/components/ContactSection";
 import NavbarComponent from "../presentation/shared/NavbarComponent";
-// import NavbarComponent from "../presentation/shared/NavbarComponent";
-// import PrivacyPolicyScreen from '../../pages/screens/PrivacyPolicyScreen';
+import { useRef } from "react";
+import FooterComponent from "../presentation/shared/FooterComponent";
 
 const MyRoutes = () => {
   const aboutRef = useRef<HTMLDivElement>(null);
@@ -39,14 +41,28 @@ const MyRoutes = () => {
 
   return (
     <Router>
-      <NavbarComponent onScroll={handleScroll} />
       <Routes>
+        <NavbarComponent onScroll={handleScroll} />
         <Route
           path="/"
-          element={<LayoutComponent children={<LandingScreen />} />}
+          element={
+            <LayoutComponent
+              children={
+                <LandingScreen
+                  children={[
+                    <HeroSection key="hero" />,
+                    <ProjectsSection key="projects" />,
+                    <ReferencesSection key="references" />,
+                    <ContactSection key="contact" />,
+                  ]}
+                />
+              }
+            />
+          }
         />
         {/* <Route path="/privacypolicy" element={<PrivacyPolicyScreen />} /> */}
       </Routes>
+      <FooterComponent />
     </Router>
   );
 };
