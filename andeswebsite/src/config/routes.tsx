@@ -42,15 +42,15 @@ const MyRoutes = () => {
   return (
     <Router>
       <NavbarComponent onScroll={handleScroll} />
+      <HeroSection key="hero" ref={heroRef} />
       <Routes>
         <Route
           path="/"
           element={
             <LayoutComponent
-              children={
-                <LandingScreen
-                  children={[
-                    <HeroSection key="hero" ref={heroRef} />,
+            children={
+              <LandingScreen
+              children={[
                     <ProjectsSection key="projects" ref={projectsRef} />,
                     <ReferencesSection key="references" ref={referencesRef} />,
                     <ContactSection key="contact" ref={contactRef} />,
