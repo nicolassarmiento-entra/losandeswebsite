@@ -1,1 +1,16 @@
 @import "tailwindcss";
+@plugin '../hero.ts';
+@source './../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+    --color-andes-primary: #FFF7F6;
+    --color-andes-secondary: #F9DDDD;
+    --color-andes-tertiary: #994D4D;
+    --color-andes-main: #D20003;
+    --color-andes-dark: #000000;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', Verdana, sans-serif;
+}
