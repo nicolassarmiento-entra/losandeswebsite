@@ -9,6 +9,7 @@ import ReferencesSection from "../presentation/components/ReferencesSection";
 import ContactSection from "../presentation/components/ContactSection";
 import NavbarComponent from "../presentation/shared/NavbarComponent";
 import FooterComponent from "../presentation/shared/FooterComponent";
+import DividerComponent from "../presentation/shared/DividerComponent";
 
 const MyRoutes = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -48,10 +49,12 @@ const MyRoutes = () => {
           path="/"
           element={
             <LayoutComponent
-            children={
-              <LandingScreen
-              children={[
+              children={
+                <LandingScreen
+                  children={[
+                    <DividerComponent text="Nuestros Proyectos" />,
                     <ProjectsSection key="projects" ref={projectsRef} />,
+                    <DividerComponent text="Casos de Exito" />,
                     <ReferencesSection key="references" ref={referencesRef} />,
                     <ContactSection key="contact" ref={contactRef} />,
                   ]}

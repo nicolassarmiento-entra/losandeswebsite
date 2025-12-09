@@ -21,7 +21,7 @@ const NavbarComponent = ({
   // Detectar la sección visible al hacer scroll
   useEffect(() => {
     const sections = ["hero", "references", "projects", "contact"];
-    
+
     const observerOptions = {
       root: null,
       rootMargin: "-50% 0px -50% 0px", // Detecta cuando la sección está en el centro del viewport
@@ -39,7 +39,10 @@ const NavbarComponent = ({
       });
     };
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions
+    );
 
     // Observar todas las secciones
     sections.forEach((sectionId) => {
@@ -69,7 +72,7 @@ const NavbarComponent = ({
   return (
     <>
       {path.pathname === "/" ? (
-        <nav className="flex justify-between items-center h-[10vh] md:grid md:grid-cols-12 text-andes-dark font-semibold bg-andes-primary z-20 fixed w-full shadow-lg opacity-95">
+        <nav className="flex justify-between items-center h-[10vh] md:grid md:grid-cols-12 text-andes-dark font-semibold bg-andes-primary z-20 fixed w-full shadow-lg">
           {/* Título */}
           <div className="md:col-span-4 lg:col-span-3">
             <img
@@ -93,10 +96,11 @@ const NavbarComponent = ({
 
             {/* Menú de navegación para móviles */}
             <section
-              className={`absolute top-12 left-0 bg-darkblue text-lightblue rounded-md shadow-lg transition-all duration-300 ease-in-out overflow-hidden ${isOpen
-                ? "opacity-100 scale-100"
-                : "opacity-0 scale-95 pointer-events-none"
-                }`}
+              className={`absolute top-12 left-0 bg-darkblue text-lightblue rounded-md shadow-lg transition-all duration-300 ease-in-out overflow-hidden ${
+                isOpen
+                  ? "opacity-100 scale-100"
+                  : "opacity-0 scale-95 pointer-events-none"
+              }`}
               style={{ transformOrigin: "top center" }}
             >
               <Link
@@ -161,18 +165,6 @@ const NavbarComponent = ({
             <Link
               to="#"
               onClick={() => {
-                onScroll("references");
-                setCurrentSection("references");
-              }}
-              className={`text-lg lg:text-xl hover:text-andes-main transition-all duration-100 cursor-pointer z-10 ${
-                currentSection === "references" ? "text-andes-main" : ""
-              }`}
-            >
-              Nosotros
-            </Link>
-            <Link
-              to="#"
-              onClick={() => {
                 onScroll("projects");
                 setCurrentSection("projects");
               }}
@@ -181,6 +173,18 @@ const NavbarComponent = ({
               }`}
             >
               Proyectos
+            </Link>
+            <Link
+              to="#"
+              onClick={() => {
+                onScroll("references");
+                setCurrentSection("references");
+              }}
+              className={`text-lg lg:text-xl hover:text-andes-main transition-all duration-100 cursor-pointer z-10 ${
+                currentSection === "references" ? "text-andes-main" : ""
+              }`}
+            >
+              Nosotros
             </Link>
             <Link
               to="#"
