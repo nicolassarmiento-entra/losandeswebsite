@@ -1,11 +1,7 @@
-const LandingScreen = ({ children }: { children: React.ReactNode[] }) => {
-  return (
-    <>
-      <div className="col-span-1 h-auto"></div>
-      <div className="col-span-10 h-auto">{children}</div>
-      <div className="col-span-1 h-auto"></div>
-    </>
-  );
+import type { ReactNode } from "react";
+
+const LandingScreen = ({ children }: { children: ReactNode }) => {
+  return <main className="flex-1">{children}</main>;
 };
 
 export default LandingScreen;

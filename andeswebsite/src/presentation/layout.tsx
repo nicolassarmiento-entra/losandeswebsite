@@ -1,8 +1,8 @@
-const LayoutComponent = ({ children }: { children: React.ReactNode }) => {
+import type { ReactNode } from "react";
+
+const LayoutComponent = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="min-h-screen grid grid-cols-12 align-center justify-center">
-      {children}
-    </div>
+    <div className="min-h-screen flex flex-col bg-andes-bg">{children}</div>
   );
 };
 

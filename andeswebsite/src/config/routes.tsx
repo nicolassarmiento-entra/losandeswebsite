@@ -3,71 +3,66 @@ import { useRef } from "react";
 
 import LayoutComponent from "../presentation/layout";
 import LandingScreen from "../presentation/pages/LandingScreen";
-import HeroSection from "../presentation/components/HeroSection";
-import ProjectsSection from "../presentation/components/ProjectsSection";
-import ReferencesSection from "../presentation/components/ReferencesSection";
-import ContactSection from "../presentation/components/ContactSection";
-import NavbarComponent from "../presentation/shared/NavbarComponent";
-import FooterComponent from "../presentation/shared/FooterComponent";
-import DividerComponent from "../presentation/shared/DividerComponent";
+import Navbar from "../presentation/organisms/Navbar";
+import HeroSection from "../presentation/organisms/HeroSection";
+import ServicesPreview from "../presentation/organisms/ServicesPreview";
+import ProjectsSection from "../presentation/organisms/ProjectsSection";
+import TestimonialsSection from "../presentation/organisms/TestimonialsSection";
+import ServicesSection from "../presentation/organisms/ServicesSection";
+import ContactSection from "../presentation/organisms/ContactSection";
+import Footer from "../presentation/organisms/Footer";
+import ProjectDetailModal from "../presentation/molecules/ProjectDetailModal";
 
-const MyRoutes = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const projectsRef = useRef<HTMLDivElement>(null);
-  const referencesRef = useRef<HTMLDivElement>(null);
-  const contactRef = useRef<HTMLDivElement>(null);
+const AppRouter = () => {
+  const heroRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLElement>(null);
+  const testimonialsRef = useRef<HTMLElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
 
-  const handleScroll = (section: string) => {
-    const refMap: Record<string, React.RefObject<HTMLDivElement | null>> = {
+  const scrollToSection = (section: string) => {
+    const refs: Record<string, React.RefObject<HTMLElement | null>> = {
       hero: heroRef,
       projects: projectsRef,
-      references: referencesRef,
+      testimonials: testimonialsRef,
       contact: contactRef,
     };
 
-    const element = refMap[section]?.current;
-
-    if (element) {
-      const navbarHeight = 100;
-      const elementPosition =
-        element.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - navbarHeight;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
+    const target = refs[section]?.current;
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    } else {
+      const el = document.getElementById(section);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
     <Router>
-      <NavbarComponent onScroll={handleScroll} />
-      <HeroSection key="hero" ref={heroRef} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <LayoutComponent
-              children={
-                <LandingScreen
-                  children={[
-                    <DividerComponent text="Nuestros Proyectos" />,
-                    <ProjectsSection key="projects" ref={projectsRef} />,
-                    <DividerComponent text="Casos de Exito" />,
-                    <ReferencesSection key="references" ref={referencesRef} />,
-                    <ContactSection key="contact" ref={contactRef} />,
-                  ]}
+      <LayoutComponent>
+        <Navbar onScroll={scrollToSection} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <LandingScreen>
+                <HeroSection
+                  ref={heroRef}
+                  onScrollToProjects={() => scrollToSection("projects")}
                 />
-              }
-            />
-          }
-        />
-        {/* <Route path="/privacypolicy" element={<PrivacyPolicyScreen />} /> */}
-      </Routes>
-      <FooterComponent />
+                <ServicesPreview />
+                <ProjectsSection ref={projectsRef} />
+                <ServicesSection />
+                <TestimonialsSection ref={testimonialsRef} />
+                <ContactSection ref={contactRef} />
+              </LandingScreen>
+            }
+          />
+        </Routes>
+        <Footer />
+        <ProjectDetailModal />
+      </LayoutComponent>
     </Router>
   );
 };
 
-export default MyRoutes;
+export default AppRouter;
